@@ -3,10 +3,14 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
-  resources :blockchain_records
-  resources :categories
-  resources :evaluations
-  resources :organizations
+  scope "/:organization_name" do
+    resources :blockchain_records
+    resources :categories
+    resources :evaluations
+    resources :organizations, param: :name
+
+    root "organizations#index"
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

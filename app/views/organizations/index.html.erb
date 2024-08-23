@@ -8,7 +8,7 @@
   <% @organizations.each do |organization| %>
     <%= render organization %>
     <p>
-      <%= link_to "Show this organization", organization %>
+      <%= link_to 'Show Organization', organization_path(name: organization.name) %>
     </p>
   <% end %>
 </div>
