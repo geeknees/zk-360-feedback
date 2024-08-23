@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_23_095019) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_23_095355) do
   create_table "blockchain_records", force: :cascade do |t|
     t.integer "evaluation_id", null: false
     t.string "tx_id"
@@ -61,11 +61,17 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_23_095019) do
     t.string "name"
     t.string "email"
     t.string "hashed_id"
-    t.integer "role"
+    t.integer "role", default: 0, null: false
     t.integer "organization_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["organization_id"], name: "index_users_on_organization_id"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "blockchain_records", "evaluations"

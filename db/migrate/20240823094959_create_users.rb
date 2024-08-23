@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration[7.2]
       t.string :name
       t.string :email
       t.string :hashed_id
-      t.integer :role
+      t.integer :role, null: false, default: 0
       t.references :organization, null: false, foreign_key: true
 
       t.timestamps
