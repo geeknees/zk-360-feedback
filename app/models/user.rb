@@ -35,4 +35,12 @@ class User < ApplicationRecord
 
   enum :role, { admin: 0, member: 1, guest: 2 }
   attr_accessor :organization_name
+  before_create :generate_user_hash
+
+  private
+
+  def generate_user_hash
+    # 例: emailやuser_idを組み合わせてハッシュを生成
+    self.hashed_id = Digest::SHA256.hexdigest("#{self.email}-#{self.id}")
+  end
 end
