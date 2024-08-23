@@ -1,0 +1,11 @@
+<% content_for :title, "New evaluation" %>
+
+<h1>New evaluation</h1>
+
+<%= render "form", evaluation: @evaluation %>
+
+<br>
+
+<div>
+  <%= link_to "Back to evaluations", evaluations_path %>
+</div>

@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  evaluator: one
+  evaluatee: one
+  category: one
+  score: 1
+  comments: MyText
+  encrypted_data: MyText
+  zk_proof: MyText
+  blockchain_tx_id: MyString
+  organization: one
+
+two:
+  evaluator: two
+  evaluatee: two
+  category: two
+  score: 1
+  comments: MyText
+  encrypted_data: MyText
+  zk_proof: MyText
+  blockchain_tx_id: MyString
+  organization: two

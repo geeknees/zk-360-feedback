@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @blockchain_record %>
+
+<div>
+  <%= link_to "Edit this blockchain record", edit_blockchain_record_path(@blockchain_record) %> |
+  <%= link_to "Back to blockchain records", blockchain_records_path %>
+
+  <%= button_to "Destroy this blockchain record", @blockchain_record, method: :delete %>
+</div>

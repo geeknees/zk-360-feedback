@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Blockchain records" %>
+
+<h1>Blockchain records</h1>
+
+<div id="blockchain_records">
+  <% @blockchain_records.each do |blockchain_record| %>
+    <%= render blockchain_record %>
+    <p>
+      <%= link_to "Show this blockchain record", blockchain_record %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New blockchain record", new_blockchain_record_path %>

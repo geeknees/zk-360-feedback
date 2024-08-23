@@ -1,0 +1,12 @@
+<% content_for :title, "Editing blockchain record" %>
+
+<h1>Editing blockchain record</h1>
+
+<%= render "form", blockchain_record: @blockchain_record %>
+
+<br>
+
+<div>
+  <%= link_to "Show this blockchain record", @blockchain_record %> |
+  <%= link_to "Back to blockchain records", blockchain_records_path %>
+</div>

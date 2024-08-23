@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  evaluation: one
+  tx_id: MyString
+  block_number: 1
+  status: MyString
+  organization: one
+
+two:
+  evaluation: two
+  tx_id: MyString
+  block_number: 1
+  status: MyString
+  organization: two
