@@ -5,6 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   belongs_to :organization
 
-  enum role: { admin: 0, member: 1, guest: 2 }
+  enum :role, { admin: 0, member: 1, guest: 2 }
   attr_accessor :organization_name
 end

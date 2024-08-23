@@ -1,0 +1,46 @@
+<h1>Edit User</h1>
+
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model: @user, url: user_path(@current_organization.name, @user), method: :patch, data: { turbo: false }) do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div>
+    <%= form.label :role %>
+    <%= form.select :role, User.roles.keys.map { |role| [role.titleize, role] }, { include_blank: false } %>
+  </div>
+
+  <div>
+    <%= form.label :password %>
+    <%= form.password_field :password %>
+  </div>
+
+  <div>
+    <%= form.label :password_confirmation %>
+    <%= form.password_field :password_confirmation %>
+  </div>
+
+  <div>
+    <%= form.submit 'Update User' %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', users_path %>
+

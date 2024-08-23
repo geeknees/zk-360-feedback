@@ -7,7 +7,12 @@
     <%= f.label :organization_name %><br />
     <%= f.text_field :organization_name, autofocus: true, autocomplete: "organization-name" %>
   </div>
-  
+
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>

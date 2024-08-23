@@ -1,0 +1,35 @@
+<h1>New User for <%= @organization.name %></h1>
+
+<%= form_with(model: @user, url: users_path(@organization.name)) do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div>
+    <%= form.label :role %>
+    <%= form.select :role, User.roles.keys.map { |role| [role.titleize, role] }, { include_blank: false } %>
+  </div>
+
+  <div>
+    <%= form.label :password %>
+    <%= form.password_field :password %>
+  </div>
+
+  <div>
+    <%= form.label :password_confirmation %>
+    <%= form.password_field :password_confirmation %>
+  </div>
+
+  <div>
+    <%= form.submit 'Create User' %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', users_path(@organization.name) %>
+
