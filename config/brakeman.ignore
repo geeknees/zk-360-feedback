@@ -1,0 +1,63 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 105,
+      "fingerprint": "8ee79721fbe4e22a227906e25b94fa14e82e493bcbc5d5eb93431a970e17d300",
+      "check_name": "PermitAttributes",
+      "message": "Potentially dangerous key allowed for mass assignment",
+      "file": "app/controllers/users_controller.rb",
+      "line": 60,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.require(:user).permit(:name, :email, :role, :password, :password_confirmation)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "UsersController",
+        "method": "user_params"
+      },
+      "user_input": ":role",
+      "confidence": "Medium",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
+      "fingerprint": "c65c85b5010341527c7c8ffa1234066412237bbdadb287232c7a63bf1a9ad256",
+      "check_name": "Render",
+      "message": "Render path contains parameter value",
+      "file": "app/views/categories/show.html.erb",
+      "line": 3,
+      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(action => Organization.find_by!(:name => params[:organization_name]).categories.find(params[:id]), {})",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "CategoriesController",
+          "method": "show",
+          "line": 11,
+          "file": "app/controllers/categories_controller.rb",
+          "rendered": {
+            "name": "categories/show",
+            "file": "app/views/categories/show.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "categories/show"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
+      "note": ""
+    }
+  ],
+  "updated": "2024-08-23 22:42:13 +0900",
+  "brakeman_version": "6.2.1"
+}
