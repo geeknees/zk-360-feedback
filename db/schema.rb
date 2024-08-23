@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_23_095355) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_23_160059) do
   create_table "blockchain_records", force: :cascade do |t|
     t.integer "evaluation_id", null: false
     t.string "tx_id"
@@ -33,7 +33,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_23_095355) do
   end
 
   create_table "evaluations", force: :cascade do |t|
-    t.integer "evaluator_id", null: false
     t.integer "evaluatee_id", null: false
     t.integer "category_id", null: false
     t.integer "score"
@@ -46,7 +45,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_23_095355) do
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_evaluations_on_category_id"
     t.index ["evaluatee_id"], name: "index_evaluations_on_evaluatee_id"
-    t.index ["evaluator_id"], name: "index_evaluations_on_evaluator_id"
     t.index ["organization_id"], name: "index_evaluations_on_organization_id"
   end
 
@@ -80,6 +78,5 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_23_095355) do
   add_foreign_key "evaluations", "categories"
   add_foreign_key "evaluations", "organizations"
   add_foreign_key "evaluations", "users", column: "evaluatee_id"
-  add_foreign_key "evaluations", "users", column: "evaluator_id"
   add_foreign_key "users", "organizations"
 end
