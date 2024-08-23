@@ -78,8 +78,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_23_095355) do
   add_foreign_key "blockchain_records", "organizations"
   add_foreign_key "categories", "organizations"
   add_foreign_key "evaluations", "categories"
-  add_foreign_key "evaluations", "evaluatees"
-  add_foreign_key "evaluations", "evaluators"
   add_foreign_key "evaluations", "organizations"
+  add_foreign_key "evaluations", "users", column: "evaluatee_id"
+  add_foreign_key "evaluations", "users", column: "evaluator_id"
   add_foreign_key "users", "organizations"
 end

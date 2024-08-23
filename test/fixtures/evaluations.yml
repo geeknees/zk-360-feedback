@@ -25,8 +25,8 @@
 # Foreign Keys
 #
 #  category_id      (category_id => categories.id)
-#  evaluatee_id     (evaluatee_id => evaluatees.id)
-#  evaluator_id     (evaluator_id => evaluators.id)
+#  evaluatee_id     (evaluatee_id => users.id)
+#  evaluator_id     (evaluator_id => users.id)
 #  organization_id  (organization_id => organizations.id)
 #
 
