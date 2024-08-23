@@ -10,13 +10,14 @@ class EvaluationsController < ApplicationController
   end
 
   def create
+    @users = @organization.users.where.not(id: current_user.id)
     # 擬似的なZK証明のチェック
     if verify_zk_proof(params[:zk_proof])
       @evaluation = @category.evaluations.new(evaluation_params)
-      @evaluation.user = current_user # 匿名性を考慮する場合、匿名トークンをここで使う
+      @evaluation.organization = @organization
 
       if @evaluation.save
-        redirect_to organization_categories_path(@organization.name), notice: "Evaluation was successfully created."
+        redirect_to users_path(@organization.name), notice: "Evaluation was successfully created."
       else
         render :new
       end
@@ -37,7 +38,7 @@ class EvaluationsController < ApplicationController
   end
 
   def evaluation_params
-    params.require(:evaluation).permit(:score, :comment)
+    params.permit(:score, :comments, :evaluatee_id)
   end
 
   # ZK証明の検証（擬似コード）

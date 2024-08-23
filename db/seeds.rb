@@ -12,6 +12,7 @@
 
 ActiveRecord::Base.transaction do
   # データ削除
+  Evaluation.destroy_all
   Category.destroy_all
   User.destroy_all
   Organization.destroy_all

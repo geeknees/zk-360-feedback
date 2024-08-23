@@ -1,10 +1,20 @@
-<!-- app/views/evaluations/new.html.erb -->
 <h1>New Evaluation</h1>
 
-<%= form_with model: [@category, @evaluation] do |form| %>
+<% if @evaluation.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@evaluation.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <ul>
+      <% @evaluation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with url: category_evaluations_path(@organization.name, @category.id), method: :post, data: { turbo: false } do |form| %>
   <div>
     <%= form.label :user_id, "Evaluatee" %>
-    <%= form.collection_select :user_id, @users, :id, :name, prompt: "Select a user" %>
+    <%= form.collection_select :evaluatee_id, @users, :id, :name, prompt: "Select a user" %>
   </div>
 
   <div>
@@ -13,8 +23,8 @@
   </div>
 
   <div>
-    <%= form.label :comment %>
-    <%= form.text_area :comment %>
+    <%= form.label :comments %>
+    <%= form.text_area :comments %>
   </div>
 
   <!-- 擬似的なZK証明を送信 -->

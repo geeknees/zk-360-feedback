@@ -27,7 +27,7 @@
 #  organization_id  (organization_id => organizations.id)
 #
 class Evaluation < ApplicationRecord
-  belongs_to :evaluatee
+  belongs_to :evaluatee, class_name: "User"
   belongs_to :category
   belongs_to :organization
 
