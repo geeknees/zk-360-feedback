@@ -28,7 +28,6 @@
 #
 
 one:
-  evaluator: one
   evaluatee: one
   category: one
   score: 1
@@ -39,7 +38,6 @@ one:
   organization: one
 
 two:
-  evaluator: two
   evaluatee: two
   category: two
   score: 1

@@ -3,6 +3,11 @@
 
 <%= form_with model: [@category, @evaluation] do |form| %>
   <div>
+    <%= form.label :user_id, "Evaluatee" %>
+    <%= form.collection_select :user_id, @users, :id, :name, prompt: "Select a user" %>
+  </div>
+
+  <div>
     <%= form.label :score %>
     <%= form.number_field :score, min: 1, max: 5 %>
   </div>

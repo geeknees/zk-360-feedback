@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_organization
   before_action :set_categories, only: [ :index ]
   before_action :set_user, only: [ :edit, :update, :destroy ]

@@ -1,10 +1,12 @@
 # app/controllers/evaluations_controller.rb
 class EvaluationsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_organization
   before_action :set_category, only: [ :new, :create ]
 
   def new
     @evaluation = @category.evaluations.new
+    @users = @organization.users.where.not(id: current_user.id)
   end
 
   def create
