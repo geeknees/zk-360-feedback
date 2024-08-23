@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_organization
+  before_action :set_categories, only: [ :index ]
   before_action :set_user, only: [ :edit, :update, :destroy ]
 
   def index
@@ -45,6 +46,10 @@ class UsersController < ApplicationController
 
   def set_organization
     @organization = Organization.find_by!(name: params[:organization_name])
+  end
+
+  def set_categories
+    @categories = @organization.categories
   end
 
   def set_user

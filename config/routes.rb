@@ -5,10 +5,11 @@ Rails.application.routes.draw do
 
   scope "/:organization_name" do
     resources :blockchain_records
-    resources :categories
-    resources :evaluations
     resources :organizations, param: :name
     resources :users
+    resources :categories do
+      resources :evaluations
+    end
 
     root "users#index"
   end

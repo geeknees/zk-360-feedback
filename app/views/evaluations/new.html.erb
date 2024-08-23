@@ -1,11 +1,22 @@
-<% content_for :title, "New evaluation" %>
+<!-- app/views/evaluations/new.html.erb -->
+<h1>New Evaluation</h1>
 
-<h1>New evaluation</h1>
+<%= form_with model: [@category, @evaluation] do |form| %>
+  <div>
+    <%= form.label :score %>
+    <%= form.number_field :score, min: 1, max: 5 %>
+  </div>
 
-<%= render "form", evaluation: @evaluation %>
+  <div>
+    <%= form.label :comment %>
+    <%= form.text_area :comment %>
+  </div>
 
-<br>
+  <!-- 擬似的なZK証明を送信 -->
+  <%= hidden_field_tag :zk_proof, "valid_proof" %>
 
-<div>
-  <%= link_to "Back to evaluations", evaluations_path %>
-</div>
+  <div>
+    <%= form.submit "Submit Evaluation" %>
+  </div>
+<% end %>
+

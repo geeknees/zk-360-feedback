@@ -1,70 +1,46 @@
+# app/controllers/evaluations_controller.rb
 class EvaluationsController < ApplicationController
-  before_action :set_evaluation, only: %i[ show edit update destroy ]
+  before_action :set_organization
+  before_action :set_category, only: [ :new, :create ]
 
-  # GET /evaluations or /evaluations.json
-  def index
-    @evaluations = Evaluation.all
-  end
-
-  # GET /evaluations/1 or /evaluations/1.json
-  def show
-  end
-
-  # GET /evaluations/new
   def new
-    @evaluation = Evaluation.new
+    @evaluation = @category.evaluations.new
   end
 
-  # GET /evaluations/1/edit
-  def edit
-  end
-
-  # POST /evaluations or /evaluations.json
   def create
-    @evaluation = Evaluation.new(evaluation_params)
+    # 擬似的なZK証明のチェック
+    if verify_zk_proof(params[:zk_proof])
+      @evaluation = @category.evaluations.new(evaluation_params)
+      @evaluation.user = current_user # 匿名性を考慮する場合、匿名トークンをここで使う
 
-    respond_to do |format|
       if @evaluation.save
-        format.html { redirect_to evaluation_url(@evaluation), notice: "Evaluation was successfully created." }
-        format.json { render :show, status: :created, location: @evaluation }
+        redirect_to organization_categories_path(@organization.name), notice: "Evaluation was successfully created."
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @evaluation.errors, status: :unprocessable_entity }
+        render :new
       end
-    end
-  end
-
-  # PATCH/PUT /evaluations/1 or /evaluations/1.json
-  def update
-    respond_to do |format|
-      if @evaluation.update(evaluation_params)
-        format.html { redirect_to evaluation_url(@evaluation), notice: "Evaluation was successfully updated." }
-        format.json { render :show, status: :ok, location: @evaluation }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @evaluation.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /evaluations/1 or /evaluations/1.json
-  def destroy
-    @evaluation.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to evaluations_url, notice: "Evaluation was successfully destroyed." }
-      format.json { head :no_content }
+    else
+      flash[:alert] = "Invalid proof. Evaluation not saved."
+      render :new
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_evaluation
-      @evaluation = Evaluation.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def evaluation_params
-      params.require(:evaluation).permit(:evaluator_id, :evaluatee_id, :category_id, :score, :comments, :encrypted_data, :zk_proof, :blockchain_tx_id, :organization_id)
-    end
+  def set_organization
+    @organization = Organization.find_by!(name: params[:organization_name])
+  end
+
+  def set_category
+    @category = @organization.categories.find(params[:category_id])
+  end
+
+  def evaluation_params
+    params.require(:evaluation).permit(:score, :comment)
+  end
+
+  # ZK証明の検証（擬似コード）
+  def verify_zk_proof(proof)
+    # 本来はzk-SNARKsなどで検証します。ここでは簡単な検証の擬似コード。
+    proof == "valid_proof"
+  end
 end
