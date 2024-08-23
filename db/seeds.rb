@@ -7,3 +7,32 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+# db/seeds.rb
+
+ActiveRecord::Base.transaction do
+  # データ削除
+  Category.destroy_all
+  User.destroy_all
+  Organization.destroy_all
+
+  # 組織の作成
+  organization1 = Organization.create!(name: "zk360")
+  organization2 = Organization.create!(name: "zk361")
+
+  # ユーザーの作成
+  User.create!([
+    { name: "Alice", email: "alice@example.com", password: "password", organization: organization1 },
+    { name: "Bob", email: "bob@example.com", password: "password", organization: organization1, role: 1 },
+    { name: "Charlie", email: "charlie@example.com", password: "password", organization: organization2 }
+  ])
+
+  # カテゴリの作成
+  Category.create!([
+    { name: "Category A", description: "Description for Category A", organization: organization1 },
+    { name: "Category B", description: "Description for Category B", organization: organization1 },
+    { name: "Category C", description: "Description for Category C", organization: organization2 }
+  ])
+end
+
+puts "Seed data created successfully!"
