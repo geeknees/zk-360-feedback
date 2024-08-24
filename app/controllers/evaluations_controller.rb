@@ -22,6 +22,11 @@ class EvaluationsController < ApplicationController
         # 単純比較実装なのでproofは更新しない
         # generate_proof
 
+        # ハッシュ化された評価データ
+        evaluation_hash = Digest::SHA256.hexdigest(@evaluation.to_json)
+        # スマートコントラクトにハッシュを保存
+        store_evaluation_hash_in_contract(evaluation_hash)
+
         redirect_to users_path(@organization.name), notice: "Evaluation was successfully created."
       else
         render :new
@@ -85,5 +90,24 @@ class EvaluationsController < ApplicationController
     public_file = Rails.root.join("implement_zk/public.json")
 
     system("snarkjs groth16 prove #{simple_proof_key} #{witness_file} #{proof_file} #{public_file}")
+  end
+
+  def store_evaluation_hash_in_contract(evaluation_hash)
+    # スマートコントラクトのインスタンスを作成
+    contract = Eth::Contract.from_abi(
+      name: "EvaluationHashStorage",
+      address: CONTRACT_ADDRESS,
+      abi: CONTRACT_ABI['abi']
+    )
+
+    # トランザクションの作成と送信
+    tx = contract.transact_and_wait.storeEvaluationHash(
+      "0xYourEvaluatorAddress",
+      evaluation_data # ここではそのまま評価データを送信
+    )
+
+    Rails.logger.info "Transaction hash: #{tx.id}"
+  rescue => e
+    Rails.logger.error "Failed to save evaluation data: #{e.message}"
   end
 end
