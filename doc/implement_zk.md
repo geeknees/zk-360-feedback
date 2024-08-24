@@ -13,6 +13,7 @@ npm install -g snarkjs
 
 prove -> verify
 ```
+node ./simple_proof_js/generate_witness.js ./simple_proof_js/simple_proof.wasm input.json witness.wtns
 snarkjs groth16 prove simple_proof_0001.zkey witness.wtns proof.json public.json
 snarkjs groth16 verify verification_key.json public.json proof.json
 ```

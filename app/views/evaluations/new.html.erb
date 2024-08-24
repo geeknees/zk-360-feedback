@@ -1,6 +1,6 @@
 <h1>New Evaluation</h1>
 
-<% if @evaluation.errors.any? %>
+<% if @evaluation&.errors&.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@evaluation.errors.count, "error") %> prohibited this user from being saved:</h2>
     <ul>
