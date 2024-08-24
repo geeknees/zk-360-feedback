@@ -12,7 +12,7 @@ A 360-degree feedback system that allows evaluations to be conducted anonymously
 - Enables anonymous 360-degree feedback.
 - Evaluators assess the target individuals based on multiple questions.
 - The evaluation results are published anonymously.
-- (Tentative) Both the evaluators and the evaluated individuals can see the evaluation results and understand how they were rated.
+- Both the evaluators and the evaluated individuals can see the evaluation results and understand how they were rated.
 
 ## Mechanism
 
@@ -55,7 +55,7 @@ A 360-degree feedback system that allows evaluations to be conducted anonymously
 - 360度評価を匿名でおこなうことができます。
 - 評価者は評価対象者に対して、複数の質問に対して評価をおこないます。
 - 評価結果は匿名で公開されます。
-- （仮）評価結果は、評価者と評価対象者の双方に対して、評価結果がどのようなものであるかを知ることができます。
+- 評価結果は、評価者と評価対象者の双方に対して、評価結果がどのようなものであるかを知ることができます。
 
 ## 仕組み
 
