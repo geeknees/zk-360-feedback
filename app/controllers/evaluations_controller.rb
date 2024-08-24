@@ -11,7 +11,7 @@ class EvaluationsController < ApplicationController
 
   def create
     @users = @organization.users.where.not(id: current_user.id)
-    # 擬似的なZK証明のチェック
+
     if verify_zk_proof(params[:zk_proof])
       @evaluation = @category.evaluations.new(evaluation_params)
       @evaluation.organization = @organization
@@ -41,9 +41,13 @@ class EvaluationsController < ApplicationController
     params.permit(:score, :comments, :evaluatee_id)
   end
 
-  # ZK証明の検証（擬似コード）
+  # ZK証明の検証
   def verify_zk_proof(proof)
-    # 本来はzk-SNARKsなどで検証します。ここでは簡単な検証の擬似コード。
-    proof == "valid_proof"
+    proof_file = Rails.root.join("implement_zk/proof.json")
+    public_file = Rails.root.join("implement_zk/public.json")
+    verification_key = Rails.root.join("implement_zk/verification_key.json")
+
+    result = `snarkjs groth16 verify #{verification_key} #{public_file} #{proof_file}`
+    result.include?("OK")
   end
 end
