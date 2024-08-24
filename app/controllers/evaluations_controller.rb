@@ -58,6 +58,7 @@ class EvaluationsController < ApplicationController
     verification_key = Rails.root.join("implement_zk/verification_key.json")
 
     result = `snarkjs groth16 verify #{verification_key} #{public_file} #{proof_file}`
+    Rails.logger.info "ZK proof verification result: #{result}"
     result.include?("OK")
   end
 
@@ -97,7 +98,7 @@ class EvaluationsController < ApplicationController
     contract = Eth::Contract.from_abi(
       name: "EvaluationHashStorage",
       address: CONTRACT_ADDRESS,
-      abi: CONTRACT_ABI['abi']
+      abi: CONTRACT_ABI["abi"]
     )
 
     # トランザクションの作成と送信
