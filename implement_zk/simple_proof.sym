@@ -1,0 +1,4 @@
+1,1,0,main.is_valid
+2,2,0,main.user_hash
+3,3,0,main.expected_hash
+4,-1,0,main.diff
