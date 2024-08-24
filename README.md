@@ -2,6 +2,11 @@
 
 A 360-degree feedback system that allows evaluations to be conducted anonymously using zero-knowledge proofs.
 
+## Contract
+
+- Address: 0x968536167d4bCbD88b35a6E12787E323400D6B8E
+- Scrollscan: [https://sepolia.scrollscan.com/address/0x968536167d4bCbD88b35a6E12787E323400D6B8E](https://sepolia.scrollscan.com/address/0x968536167d4bCbD88b35a6E12787E323400D6B8E)
+
 ## Overview
 
 - Enables anonymous 360-degree feedback.
